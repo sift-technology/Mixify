@@ -7,6 +7,7 @@ import { QuestionComponent } from './question/question.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
