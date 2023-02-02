@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"src/server/utils"
 
 	"github.com/gorilla/mux"
+
+	"bytes"
+	"encoding/json"
 )
 
 func main() {
@@ -19,7 +21,17 @@ func main() {
 	http.ListenAndServe(":8080", r)
 }
 
-func hello(resp http.ResponseWriter, _ *http.Request) {
+func StructToJSON(data interface{}) ([]byte, error) {
+	buf := new(bytes.Buffer)
+
+	if err := json.NewEncoder(buf).Encode(data); err != nil {
+		return nil, err
+	}
+
+	return buf.Bytes(), nil
+}
+
+func hello(w http.ResponseWriter, _ *http.Request) {
 
 	var data = struct {
 		Title string `json:"title"`
@@ -27,7 +39,7 @@ func hello(resp http.ResponseWriter, _ *http.Request) {
 		Title: "Golang + Angular Starter Kit",
 	}
 
-	jsonBytes, err := utils.StructToJSON(data)
+	jsonBytes, err := StructToJSON(data)
 	if err != nil {
 		fmt.Print(err)
 	}
