@@ -1,4 +1,2 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-html, body { height: 100%; width: 90%; text-align: center;}
+html, body { height: 100%; width: 100%; text-align: center;}
 body { margin: auto; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
