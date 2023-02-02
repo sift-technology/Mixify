@@ -1,0 +1,22 @@
+<h2>{{ title }}</h2>
+<mat-card>
+    <h3>What is your favorite color?</h3>
+    <mat-button-toggle-group #favcolor="matButtonToggleGroup" aria-label="Favorite Color">
+        <mat-button-toggle value="red">Red</mat-button-toggle>
+        <mat-button-toggle value="green">Green</mat-button-toggle>
+        <mat-button-toggle value="blue">Blue</mat-button-toggle>
+        <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
+    </mat-button-toggle-group>
+    <p>Chosen value is {{favcolor.value}}</p>
+</mat-card>
+<br>
+<mat-card>
+    <h3>What is your favorite color?</h3>
+    <mat-button-toggle-group #favcolor2="matButtonToggleGroup" aria-label="Favorite Color">
+        <mat-button-toggle value="red">Red</mat-button-toggle>
+        <mat-button-toggle value="green">Green</mat-button-toggle>
+        <mat-button-toggle value="blue">Blue</mat-button-toggle>
+        <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
+    </mat-button-toggle-group>
+    <p>Chosen value is {{favcolor2.value}}</p>
+</mat-card>
