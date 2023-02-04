@@ -1,0 +1,16 @@
+### get
+GET http://localhost:8080/response
+
+### post 
+POST http://localhost:8080/response
+Content-Type: application/json
+
+{
+    "R1": 1,
+    "R2": 2,
+    "R3": 2,
+    "R4": 2
+}
+
+### delete
+DELETE http://localhost:8080/response/b8aa178a-4eed-473f-94da-256602dd989d

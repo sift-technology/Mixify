@@ -27,13 +27,14 @@ func NewServer() *Server {
 		Router:       mux.NewRouter(),
 		Responses_DB: []Response{},
 	}
+	s.routes()
 	return s
 }
 
 func (s *Server) routes() {
 	s.HandleFunc("/response", s.ListResponses()).Methods("GET")
-	s.HandleFunc("/respone", s.CreateResponse()).Methods("POST")
-	s.HandleFunc("/response/(id}", s.removeResponse()).Methods("DELETE")
+	s.HandleFunc("/response", s.CreateResponse()).Methods("POST")
+	s.HandleFunc("/response/{id}", s.removeResponse()).Methods("DELETE")
 }
 
 func (s *Server) CreateResponse() http.HandlerFunc {
