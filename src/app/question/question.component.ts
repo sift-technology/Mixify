@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class QuestionComponent{
     title = "Questions: ";
+    slideValue = 0;
 
     onSubmit(data: string, data2: string) {
       console.log(data, data2);
