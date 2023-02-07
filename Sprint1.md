@@ -3,7 +3,7 @@
 **User stories:**
   1. Basic Survey Design: _As a music listener, I want to select choices from a survey so that the application can store my preferences._
   2. Basic Survey Functionality: _As a backend developer, I want to collect user responses from a survey and store them in a database so that they can later be used._
-  3. Create Back-End HTTP Shell
+  3. Create Back-End HTTP Shell: _As a user, I want to be able connect to the website server so that it can process my requests.
   4. Create Front-End Survey Shell: _As a Spotify user and music listener, I want to be able to take an interactive and engaging quiz to learn more about my music tastes._
   5. Create Backend Database to Store Survey Responses: _As a user of the frontend functionality, I want to be able to see results of my quiz based on input I gave._
   6. Create Login: _As a user, I want to setup a username and password to save my responses._
