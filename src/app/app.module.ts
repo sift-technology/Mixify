@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button'
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     MatButtonToggleModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSliderModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
