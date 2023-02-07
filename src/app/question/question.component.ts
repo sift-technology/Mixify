@@ -8,9 +8,15 @@ import { FormBuilder } from '@angular/forms';
 })
 export class QuestionComponent{
     title = "Questions: ";
-    slideValue = 0;
+    disabled = false;
+    max = 100;
+    min = 0;
+    showTicks = false;
+    step = 1;
+    thumbLabel = true;
+    value = 50;
 
-    onSubmit(data: string, data2: string) {
-      console.log(data, data2);
+    onSubmit(data: string, data2: string, data3: string, data4: string) {
+      console.log(data, data2, data3, data4);
     }
 }
