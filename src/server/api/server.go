@@ -35,6 +35,7 @@ func (s *Server) routes() {
 	s.HandleFunc("/response", s.ListResponses()).Methods("GET")
 	s.HandleFunc("/response", s.CreateResponse()).Methods("POST")
 	s.HandleFunc("/response/{id}", s.removeResponse()).Methods("DELETE")
+	s.PathPrefix("/").Handler(AngularHandler).Methods("GET")
 }
 
 func (s *Server) CreateResponse() http.HandlerFunc {
