@@ -1,12 +1,12 @@
 <h2>{{ title }}</h2>
-<form (ngSubmit)="onSubmit(favcolor.value, favcolor2.value, matslider.value, favanimal.value)">
+<form #myForm="ngForm" (ngSubmit)="onSubmit(favcolor.value, favcolor2.value, matslider.value, favanimal.value)">
     <mat-card>
         <h3>What is your favorite color?</h3>
         <mat-button-toggle-group #favcolor="matButtonToggleGroup">
-            <mat-button-toggle value="red">Red</mat-button-toggle>
-            <mat-button-toggle value="green">Green</mat-button-toggle>
-            <mat-button-toggle value="blue">Blue</mat-button-toggle>
-            <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
+            <mat-button-toggle type="button" value="1">Red</mat-button-toggle>
+            <mat-button-toggle type="button" value="2">Green</mat-button-toggle>
+            <mat-button-toggle type="button" value="3">Blue</mat-button-toggle>
+            <mat-button-toggle type="button" value="4">Yellow</mat-button-toggle>
         </mat-button-toggle-group>
         <p>Chosen value is {{favcolor.value}}</p>
     </mat-card>
@@ -14,10 +14,10 @@
     <mat-card>
         <h3>What is your favorite color?</h3>
         <mat-button-toggle-group #favcolor2="matButtonToggleGroup">
-            <mat-button-toggle value="red">Red</mat-button-toggle>
-            <mat-button-toggle value="green">Green</mat-button-toggle>
-            <mat-button-toggle value="blue">Blue</mat-button-toggle>
-            <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
+            <mat-button-toggle type="button" value="1">Red</mat-button-toggle>
+            <mat-button-toggle type="button" value="2">Green</mat-button-toggle>
+            <mat-button-toggle type="button" value="3">Blue</mat-button-toggle>
+            <mat-button-toggle type="button" value="4">Yellow</mat-button-toggle>
         </mat-button-toggle-group>
         <p>Chosen value is {{favcolor2.value}}</p>
     </mat-card>
@@ -40,10 +40,10 @@
     <mat-card>
         <h3>What is your favorite animal?</h3>
         <mat-button-toggle-group #favanimal="matButtonToggleGroup">
-            <mat-button-toggle value="dog"><img src="https://appadvice.com/cdn-cgi/mirage/80ec584b7eeb7e415153342264be8f6a183ab0093f2374a280e6e387f47020ee/1280/https://is4-ssl.mzstatic.com/image/thumb/Purple111/v4/f9/c2/a4/f9c2a4a8-2f99-0dc0-8ae9-d1f16a0de5d8/source/256x256bb.jpg"></mat-button-toggle>
-            <mat-button-toggle value="cat"><img src="https://pbs.twimg.com/profile_images/597837691758071808/k5sArpEH_400x400.jpg"></mat-button-toggle>
-            <mat-button-toggle value="bunny"><img src="https://styles.redditmedia.com/t5_2qojq/styles/communityIcon_tdrsm9kkmbv31.jpg"></mat-button-toggle>
-            <mat-button-toggle value="hamster"><img src="https://i.etsystatic.com/39853966/r/il/3139bf/4469601372/il_fullxfull.4469601372_ac34.jpg"></mat-button-toggle>
+            <mat-button-toggle type="button" value="1"><img src="https://appadvice.com/cdn-cgi/mirage/80ec584b7eeb7e415153342264be8f6a183ab0093f2374a280e6e387f47020ee/1280/https://is4-ssl.mzstatic.com/image/thumb/Purple111/v4/f9/c2/a4/f9c2a4a8-2f99-0dc0-8ae9-d1f16a0de5d8/source/256x256bb.jpg"></mat-button-toggle>
+            <mat-button-toggle type="button" value="2"><img src="https://pbs.twimg.com/profile_images/597837691758071808/k5sArpEH_400x400.jpg"></mat-button-toggle>
+            <mat-button-toggle type="button" value="3"><img src="https://styles.redditmedia.com/t5_2qojq/styles/communityIcon_tdrsm9kkmbv31.jpg"></mat-button-toggle>
+            <mat-button-toggle type="button" value="4"><img src="https://i.etsystatic.com/39853966/r/il/3139bf/4469601372/il_fullxfull.4469601372_ac34.jpg"></mat-button-toggle>
         </mat-button-toggle-group>
         <p>Chosen value is {{favanimal.value}}</p>
     </mat-card>
