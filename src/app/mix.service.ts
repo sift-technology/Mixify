@@ -9,6 +9,6 @@ export class MixService {
   constructor(private http: HttpClient) { }
 
   getList(results:number[]) {
-
+    
   }
 }
