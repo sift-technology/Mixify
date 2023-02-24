@@ -40,7 +40,6 @@ func (s *Server) routes() {
 }
 
 func (s *Server) CreateResponse() http.HandlerFunc {
-
 	return func(w http.ResponseWriter, r *http.Request) {
 		var i Response
 		fmt.Println("reached")
@@ -51,7 +50,6 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 
 		i.ID = uuid.New()
 		s.Responses_DB = append(s.Responses_DB, i)
-		fmt.Println(i.R1)
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(i); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)

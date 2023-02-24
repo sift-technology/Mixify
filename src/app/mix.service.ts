@@ -10,6 +10,6 @@ export class MixService {
   constructor(private http: HttpClient) { }
 
   getList(results:number[]) {
-    return this.http.post<any>('http://localhost:8080/', results);
+    return this.http.post<any>('http://localhost:8080/results', results);
   }
 }

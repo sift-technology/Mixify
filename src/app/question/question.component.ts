@@ -30,8 +30,7 @@ export class QuestionComponent{
       this.RESULTS[1] = data2;
       this.RESULTS[2] = data3;
       this.RESULTS[3] = data4;
-
-      this.myservice.getList(this.RESULTS)
+      this.myservice.getList(this.RESULTS);
       console.log(this.RESULTS);
     }
 }
