@@ -10,11 +10,11 @@ import (
 )
 
 type Response struct {
-	ID uuid.UUID `json:"ID"`
-	R1 int       `json:"R1"`
-	R2 int       `json:"R2"`
-	R3 int       `json:"R3"`
-	R4 int       `json:"R4"`
+	ID uuid.UUID   `json:"ID"`
+	R1 json.Number `json:"R1"`
+	R2 json.Number `json:"R2"`
+	R3 json.Number `json:"R3"`
+	R4 json.Number `json:"R4"`
 }
 
 type Server struct {
@@ -40,18 +40,20 @@ func (s *Server) routes() {
 }
 
 func (s *Server) CreateResponse() http.HandlerFunc {
-
 	return func(w http.ResponseWriter, r *http.Request) {
-		var i Response
+		var user Response
+		var i [4]json.Number
 		fmt.Println("reached")
 		if err := json.NewDecoder(r.Body).Decode(&i); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-
-		i.ID = uuid.New()
-		s.Responses_DB = append(s.Responses_DB, i)
-		fmt.Println(i.R1)
+		user.R1 = i[0]
+		user.R2 = i[1]
+		user.R3 = i[2]
+		user.R4 = i[3]
+		user.ID = uuid.New()
+		s.Responses_DB = append(s.Responses_DB, user)
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(i); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
