@@ -32,7 +32,7 @@
             [step]="step"
             [discrete]="thumbLabel"
             [showTickMarks]="showTicks">
-        <input matSliderThumb #matslider>
+        <input type="range" matSliderThumb #matslider>
         </mat-slider>
         <p>Chosen value is {{matslider.value}}</p>
     </mat-card>
@@ -40,7 +40,7 @@
     <mat-card>
         <h3>What is your favorite animal?</h3>
         <mat-button-toggle-group #favanimal="matButtonToggleGroup">
-            <mat-button-toggle type="button" value=1><img src="https://appadvice.com/cdn-cgi/mirage/80ec584b7eeb7e415153342264be8f6a183ab0093f2374a280e6e387f47020ee/1280/https://is4-ssl.mzstatic.com/image/thumb/Purple111/v4/f9/c2/a4/f9c2a4a8-2f99-0dc0-8ae9-d1f16a0de5d8/source/256x256bb.jpg"></mat-button-toggle>
+            <mat-button-toggle type="button" value=1><img src="https://styles.redditmedia.com/t5_346cl/styles/communityIcon_09sormoxbtu31.png"></mat-button-toggle>
             <mat-button-toggle type="button" value=2><img src="https://pbs.twimg.com/profile_images/597837691758071808/k5sArpEH_400x400.jpg"></mat-button-toggle>
             <mat-button-toggle type="button" value=3><img src="https://styles.redditmedia.com/t5_2qojq/styles/communityIcon_tdrsm9kkmbv31.jpg"></mat-button-toggle>
             <mat-button-toggle type="button" value=4><img src="https://i.etsystatic.com/39853966/r/il/3139bf/4469601372/il_fullxfull.4469601372_ac34.jpg"></mat-button-toggle>
