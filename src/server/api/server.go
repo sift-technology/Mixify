@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/google/uuid"
@@ -33,14 +34,16 @@ func NewServer() *Server {
 
 func (s *Server) routes() {
 	s.HandleFunc("/response", s.ListResponses()).Methods("GET")
-	s.HandleFunc("/response", s.CreateResponse()).Methods("POST")
+	s.HandleFunc("/results", s.CreateResponse()).Methods("POST")
 	s.HandleFunc("/response/{id}", s.removeResponse()).Methods("DELETE")
 	s.PathPrefix("/").Handler(AngularHandler).Methods("GET")
 }
 
 func (s *Server) CreateResponse() http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		var i Response
+		fmt.Println("reached")
 		if err := json.NewDecoder(r.Body).Decode(&i); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
@@ -48,7 +51,7 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 
 		i.ID = uuid.New()
 		s.Responses_DB = append(s.Responses_DB, i)
-
+		fmt.Println(i.R1)
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(i); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)

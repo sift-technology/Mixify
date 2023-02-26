@@ -8,7 +8,7 @@ const routes: Routes = [];
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      {path: 'question', component: QuestionComponent},
+      {path: '', component: QuestionComponent},
       {path: 'results', component: ResultsComponent},
     ]),
   ],

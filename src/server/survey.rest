@@ -2,7 +2,7 @@
 GET http://localhost:8080/response
 
 ### post 
-POST http://localhost:8080/response
+POST http://localhost:8080/results
 Content-Type: application/json
 
 {
