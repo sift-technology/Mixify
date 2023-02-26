@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/aarti2626/Mixify/src/server/api"
+	"github.com/google/uuid"
 )
 
 func TestValidateJSONResponse(t *testing.T) {
@@ -20,9 +21,21 @@ func TestValidateJSONResponse(t *testing.T) {
 	i.R3 = user["R3"]
 	i.R4 = user["R4"]
 	if i.R2 != user["R2"] {
-		t.Errorf("Incompatible cast from json.Number to int")
+		t.Errorf("Could not populate Response with JSON numbers")
 	} else {
-		fmt.Println("Test succeeded")
+		fmt.Println("Test passed: valid JSON response")
 	}
 
+}
+
+func TestCreateUniqueUUID(t *testing.T) {
+	var i api.Response
+	i.ID = uuid.New()
+	api.NewServer().Responses_DB = append(api.NewServer().Responses_DB, i)
+	for index := range api.NewServer().Responses_DB {
+		if api.NewServer().Responses_DB[index].ID == i.ID {
+			t.Errorf("Non-unique ID found")
+		}
+	}
+	fmt.Println("Test passed: unique UUID created")
 }
