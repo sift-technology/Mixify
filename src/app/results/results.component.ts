@@ -7,5 +7,5 @@ import { MixService } from '../mix.service';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent {
-
+  
 }
