@@ -58,7 +58,7 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 		user.R3 = i[2]
 		user.R4 = i[3]
 		user.ID = uuid.New()
-		weights(&user)
+		Weights(&user)
 		s.Responses_DB = append(s.Responses_DB, user)
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(i); err != nil {
@@ -68,7 +68,7 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 	}
 }
 
-func weights(user *Response) {
+func Weights(user *Response) {
 	// metric = {danceability, energy, popularity, acousticness}
 	R1, err1 := user.R1.Int64()
 	R2, err2 := user.R2.Int64()
