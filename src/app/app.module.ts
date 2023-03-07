@@ -18,12 +18,14 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ResultsComponent } from './results/results.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionComponent,
     ResultsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
