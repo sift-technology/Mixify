@@ -60,6 +60,7 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 		user.ID = uuid.New()
 		Weights(&user)
 		s.Responses_DB = append(s.Responses_DB, user)
+		// create track attributes here
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(i); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
