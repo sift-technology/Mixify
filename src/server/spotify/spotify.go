@@ -1,33 +1,43 @@
 package spotify
 
 import (
-	"context"
 	"log"
 
 	"github.com/zmb3/spotify"
-	"golang.org/x/oauth2/clientcredentials"
 )
 
-func Authenticate() {
-	authConfig := &clientcredentials.Config{
+func Recommend(client *spotify.Client) {
 
-		TokenURL: spotify.TokenURL,
-	}
+	artistID := []spotify.ID{}
+	trackID := []spotify.ID{}
+	genre := []string{}
 
-	accessToken, err := authConfig.Token(context.Background())
+	artistID = append(artistID, spotify.ID("06HL4z0CvFAxyc27GXpf02")) // Sophie msmsmsmsmsmsmsmmsms
+	trackID = append(trackID, spotify.ID("0V3wPSX9ygBnCm8psDIegu"))   // Super Bass
+	genre = append(genre, "pop")
+
+	var seed spotify.Seeds
+	seed.Artists = artistID
+	seed.Tracks = trackID
+	seed.Genres = genre
+
+	ta := spotify.NewTrackAttributes().TargetAcousticness(0.1).TargetPopularity(40).TargetDanceability(0.8)
+
+	var opt spotify.Options
+	var lim int = 100
+	var country string = "US"
+	var offset int = 0
+	var r string = "medium"
+	opt.Limit = &lim
+	opt.Country = &country
+	opt.Offset = &offset
+	opt.Timerange = &r
+
+	recs, err := client.GetRecommendations(seed, ta, &opt)
 	if err != nil {
-		log.Fatalf("error retrieve access token: %v", err)
+		log.Fatalf("Couldn't get recommendation: %v", err)
 	}
 
-	client := spotify.Authenticator{}.NewClient(accessToken)
+	log.Println("song recs:", recs.Tracks)
 
-	playlistID := spotify.ID("37i9dQZF1DXcBWIGoYBM5M")
-	playlist, err := client.GetPlaylist(playlistID)
-	if err != nil {
-		log.Fatalf("error retrieve playlist data: %v", err)
-	}
-
-	log.Println("playlist id:", playlist.ID)
-	log.Println("playlist name:", playlist.Name)
-	log.Println("playlist description:", playlist.Description)
 }
