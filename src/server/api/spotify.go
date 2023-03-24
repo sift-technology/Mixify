@@ -1,4 +1,4 @@
-package spotify
+package api
 
 import (
 	"log"
@@ -6,14 +6,14 @@ import (
 	"github.com/zmb3/spotify"
 )
 
-func Recommend(client *spotify.Client) {
+func Recommend(client *spotify.Client, user *Response) []spotify.SimpleTrack {
 
 	artistID := []spotify.ID{}
 	trackID := []spotify.ID{}
 	genre := []string{}
 
-	artistID = append(artistID, spotify.ID("06HL4z0CvFAxyc27GXpf02")) // Sophie msmsmsmsmsmsmsmmsms
-	trackID = append(trackID, spotify.ID("0V3wPSX9ygBnCm8psDIegu"))   // Super Bass
+	artistID = append(artistID, spotify.ID("5a2w2tgpLwv26BYJf2qYwu")) // Sophie msmsmsmsmsmsmsmmsms
+	trackID = append(trackID, spotify.ID("3hlksXnvbKogFdPbpO9vel"))   // Super Bass
 	genre = append(genre, "pop")
 
 	var seed spotify.Seeds
@@ -21,7 +21,10 @@ func Recommend(client *spotify.Client) {
 	seed.Tracks = trackID
 	seed.Genres = genre
 
-	ta := spotify.NewTrackAttributes().TargetAcousticness(0.1).TargetPopularity(40).TargetDanceability(0.8)
+	ta := spotify.NewTrackAttributes().TargetAcousticness(user.M.Acousticness).
+		TargetPopularity(user.M.Popularity).
+		TargetDanceability(user.M.Danceability).
+		TargetEnergy(user.M.Energy)
 
 	var opt spotify.Options
 	var lim int = 100
@@ -38,6 +41,6 @@ func Recommend(client *spotify.Client) {
 		log.Fatalf("Couldn't get recommendation: %v", err)
 	}
 
-	log.Println("song recs:", recs.Tracks)
+	return recs.Tracks
 
 }

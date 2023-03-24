@@ -7,6 +7,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
+	"github.com/zmb3/spotify"
 )
 
 type Response struct {
@@ -16,23 +17,32 @@ type Response struct {
 	R3 json.Number `json:"R3"`
 	R4 json.Number `json:"R4"`
 	M  struct {
-		Danceability float32 `json:"danceability"`
-		Energy       float32 `json:"energy"`
-		Popularity   int64   `json:"popularity"`
-		Acousticness float32 `json:"acousticness"`
+		Danceability float64 `json:"danceability"`
+		Energy       float64 `json:"energy"`
+		Popularity   int     `json:"popularity"`
+		Acousticness float64 `json:"acousticness"`
 	}
+}
+
+type Rec struct {
+	ID   uuid.UUID             `json:"ID"`
+	Recs []spotify.SimpleTrack `json:"tracks"`
 }
 
 type Server struct {
 	*mux.Router
 
 	Responses_DB []Response
+	Rec_DB       []Rec
+	Client       *spotify.Client
 }
 
 func NewServer() *Server {
 	s := &Server{
 		Router:       mux.NewRouter(),
 		Responses_DB: []Response{},
+		Rec_DB:       []Rec{},
+		Client:       Authenticate(),
 	}
 	s.routes()
 	return s
@@ -48,6 +58,7 @@ func (s *Server) routes() {
 func (s *Server) CreateResponse() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var user Response
+		var userRec Rec
 		var i [4]json.Number
 		if err := json.NewDecoder(r.Body).Decode(&i); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -60,6 +71,9 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 		user.ID = uuid.New()
 		Weights(&user)
 		s.Responses_DB = append(s.Responses_DB, user)
+		userRec.ID = user.ID
+		userRec.Recs = Recommend(s.Client, &user)
+		s.Rec_DB = append(s.Rec_DB, userRec)
 		// create track attributes here
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(i); err != nil {
@@ -80,28 +94,28 @@ func Weights(user *Response) {
 		fmt.Print("can't convert Response")
 	}
 
-	DanceWeightR1 := [4]float32{0.5, 0.2, 0.4, 0.1}[R1-1]
-	DanceWeightR3 := float32(R3 / 100)
+	DanceWeightR1 := [4]float64{0.5, 0.2, 0.4, 0.1}[R1-1]
+	DanceWeightR3 := float64(R3 / 100)
 	user.M.Danceability = (DanceWeightR1 + DanceWeightR3) / 2 //average
 
-	EnergyWeightR1 := ([4]float32{0.2, 0.4, 0.1, 0.3}[R1-1]) * 0.2
-	EnergyWeightR4 := ([4]float32{0.8, 0.4, 0.3, 0.7}[R4-1]) * 0.8
+	EnergyWeightR1 := ([4]float64{0.2, 0.4, 0.1, 0.3}[R1-1]) * 0.2
+	EnergyWeightR4 := ([4]float64{0.8, 0.4, 0.3, 0.7}[R4-1]) * 0.8
 	user.M.Energy = EnergyWeightR1 + EnergyWeightR4 //scaled
 
-	PopularityWeightR1 := [4]int64{20, 60, 30, 80}[R1-1]
-	PopularityWeightR2 := [4]int64{40, 20, 60, 70}[R2-1]
-	PopularityWeightR3 := R3
-	PopularityWeightR4 := [4]int64{80, 50, 30, 60}[R4-1]
+	PopularityWeightR1 := [4]int{20, 60, 30, 80}[R1-1]
+	PopularityWeightR2 := [4]int{40, 20, 60, 70}[R2-1]
+	PopularityWeightR3 := int(R3)
+	PopularityWeightR4 := [4]int{80, 50, 30, 60}[R4-1]
 	user.M.Popularity = (PopularityWeightR1 + PopularityWeightR2 + PopularityWeightR3 + PopularityWeightR4) / 4
 
-	AccusticnessWeightR4 := [4]float32{0.4, 0.8, 0.3, 0.9}[R4-1]
+	AccusticnessWeightR4 := [4]float64{0.4, 0.8, 0.3, 0.9}[R4-1]
 	user.M.Acousticness = AccusticnessWeightR4
 }
 
 func (s *Server) ListResponses() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		if err := json.NewEncoder(w).Encode(s.Responses_DB); err != nil {
+		if err := json.NewEncoder(w).Encode(s.Rec_DB); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
