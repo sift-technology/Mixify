@@ -11,9 +11,8 @@ import (
 func Authenticate() {
 
 	authConfig := &clientcredentials.Config{
-		ClientID:     "6277022508444e50870dde60e2131882",
-		ClientSecret: "78bde7df219c400bb0bcd6e658e76d06",
-		TokenURL:     spotify.TokenURL,
+
+		TokenURL: spotify.TokenURL,
 	}
 
 	accessToken, err := authConfig.Token(context.Background())
