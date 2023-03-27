@@ -8,18 +8,13 @@ import (
 
 func Recommend(client *spotify.Client, user *Response) []spotify.SimpleTrack {
 
-	artistID := []spotify.ID{}
 	trackID := []spotify.ID{}
-	genre := []string{}
 
-	artistID = append(artistID, spotify.ID("5a2w2tgpLwv26BYJf2qYwu")) // Sophie msmsmsmsmsmsmsmmsms
-	trackID = append(trackID, spotify.ID("3hlksXnvbKogFdPbpO9vel"))   // Super Bass
-	genre = append(genre, "pop")
+	trackID[0] = user.M.Track1
+	trackID[1] = user.M.Track2
 
 	var seed spotify.Seeds
-	seed.Artists = artistID
 	seed.Tracks = trackID
-	seed.Genres = genre
 
 	ta := spotify.NewTrackAttributes().TargetAcousticness(user.M.Acousticness).
 		TargetPopularity(user.M.Popularity).
@@ -27,11 +22,9 @@ func Recommend(client *spotify.Client, user *Response) []spotify.SimpleTrack {
 		TargetEnergy(user.M.Energy)
 
 	var opt spotify.Options
-	var lim int = 100
 	var country string = "US"
 	var offset int = 0
 	var r string = "medium"
-	opt.Limit = &lim
 	opt.Country = &country
 	opt.Offset = &offset
 	opt.Timerange = &r
