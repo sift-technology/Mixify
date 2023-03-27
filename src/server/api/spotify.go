@@ -3,6 +3,8 @@ package api
 import (
 	"log"
 
+	"fmt"
+
 	"github.com/zmb3/spotify"
 )
 
@@ -33,6 +35,14 @@ func Recommend(client *spotify.Client, user *Response) []spotify.SimpleTrack {
 	if err != nil {
 		log.Fatalf("Couldn't get recommendation: %v", err)
 	}
+	for i := 0; i < len(recs.Tracks); i++ {
+		trackID[i] = recs.Tracks[i].ID
+	}
+
+	playlist, err := client.CreatePlaylistForUser("nateisding", "EEEWEWEWEW", "OKA", true)
+
+	client.AddTracksToPlaylist(playlist.ID, trackID...)
+	fmt.Println(playlist.SimplePlaylist.ExternalURLs)
 
 	return recs.Tracks
 
