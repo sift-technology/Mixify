@@ -10,17 +10,30 @@ import (
 	"github.com/zmb3/spotify"
 )
 
+var badBunny spotify.ID = spotify.ID("1IHWl5LamUGEuP4ozKQSXZ")
+var tSwift spotify.ID = spotify.ID("1vrd6UOGamcKNGnSHJQlSt")
+var nirvana spotify.ID = spotify.ID("4P5KoWXOxwuobLmHXLMobV")
+var oneHeart spotify.ID = spotify.ID("4xF4ZBGPZKxECeDFrqSAG4")
+var fOcean spotify.ID = spotify.ID("3xKsf9qdS1CyvXSMEid6g8")
+var tImpala spotify.ID = spotify.ID("52ojopYMUzeNcudsoz7O9D")
+var cKeef spotify.ID = spotify.ID("01Lr5YepbgjXAWR9iOEyH1")
+var iceSpice spotify.ID = spotify.ID("6AQbmUe0Qwf5PZnt4HmTXv")
+
 type Response struct {
 	ID uuid.UUID   `json:"ID"`
 	R1 json.Number `json:"R1"`
 	R2 json.Number `json:"R2"`
 	R3 json.Number `json:"R3"`
 	R4 json.Number `json:"R4"`
+	R5 json.Number `json:"R5"`
+	R6 json.Number `json:"R6"`
 	M  struct {
-		Danceability float64 `json:"danceability"`
-		Energy       float64 `json:"energy"`
-		Popularity   int     `json:"popularity"`
-		Acousticness float64 `json:"acousticness"`
+		Danceability float64    `json:"danceability"`
+		Energy       float64    `json:"energy"`
+		Popularity   int        `json:"popularity"`
+		Acousticness float64    `json:"acousticness"`
+		Track1       spotify.ID `json:"Track1"`
+		Track2       spotify.ID `json:"Track2"`
 	}
 }
 
@@ -89,27 +102,20 @@ func Weights(user *Response) {
 	R2, err2 := user.R2.Int64()
 	R3, err3 := user.R3.Int64()
 	R4, err4 := user.R4.Int64()
+	R5, err5 := user.R5.Int64()
+	R6, err6 := user.R6.Int64()
 
-	if err1 != nil && err2 != nil && err3 != nil && err4 != nil {
+	if err1 != nil && err2 != nil && err3 != nil && err4 != nil && err5 != nil && err6 != nil {
 		fmt.Print("can't convert Response")
 	}
 
-	DanceWeightR1 := [4]float64{0.5, 0.2, 0.4, 0.1}[R1-1]
-	DanceWeightR3 := float64(R3 / 100)
-	user.M.Danceability = (DanceWeightR1 + DanceWeightR3) / 2 //average
+	user.M.Danceability = [4]float64{0.5, 0.75, 0.25, 1.0}[R1-1]
+	user.M.Energy = [4]float64{0.25, 0.5, 0.75, 1.0}[R2-1]
+	user.M.Popularity = int(R3) * 100
+	user.M.Track1 = [4]spotify.ID{fOcean, iceSpice, tImpala, cKeef}[R4-1]
+	user.M.Acousticness = [4]float64{0.75, 0.5, 1.09, 0.25}[R5-1]
+	user.M.Track2 = [4]spotify.ID{nirvana, tSwift, oneHeart, badBunny}[R6-1]
 
-	EnergyWeightR1 := ([4]float64{0.2, 0.4, 0.1, 0.3}[R1-1]) * 0.2
-	EnergyWeightR4 := ([4]float64{0.8, 0.4, 0.3, 0.7}[R4-1]) * 0.8
-	user.M.Energy = EnergyWeightR1 + EnergyWeightR4 //scaled
-
-	PopularityWeightR1 := [4]int{20, 60, 30, 80}[R1-1]
-	PopularityWeightR2 := [4]int{40, 20, 60, 70}[R2-1]
-	PopularityWeightR3 := int(R3)
-	PopularityWeightR4 := [4]int{80, 50, 30, 60}[R4-1]
-	user.M.Popularity = (PopularityWeightR1 + PopularityWeightR2 + PopularityWeightR3 + PopularityWeightR4) / 4
-
-	AccusticnessWeightR4 := [4]float64{0.4, 0.8, 0.3, 0.9}[R4-1]
-	user.M.Acousticness = AccusticnessWeightR4
 }
 
 func (s *Server) ListResponses() http.HandlerFunc {
