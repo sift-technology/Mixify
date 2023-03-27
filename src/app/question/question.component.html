@@ -1,22 +1,22 @@
 <h2>{{ title }}</h2>
-<form #myForm="ngForm" (ngSubmit)="onSubmit(favcolor.value, favcolor2.value, +matslider.value, favanimal.value)">
+<form #myForm="ngForm" (ngSubmit)="onSubmit(place.value, drink.value, +matslider.value, tattoo.value, journal.value, bedroom.value)">
     <mat-card>
         <h3>If you could be anywhere right now, where would you be?</h3>
-        <mat-button-toggle-group #favcolor="matButtonToggleGroup">
-            <mat-button-toggle type="button" value=1>at a local coffee shop</mat-button-toggle>
-            <mat-button-toggle type="button" value=2>driving with the windows down</mat-button-toggle>
-            <mat-button-toggle type="button" value=3>one with nature</mat-button-toggle>
-            <mat-button-toggle type="button" value=4>at a club</mat-button-toggle>
+        <mat-button-toggle-group #place="matButtonToggleGroup">
+            <mat-button-toggle type="button" value=1><img src="..\assets\images\coffeeshop.png">at a coffee shop</mat-button-toggle>
+            <mat-button-toggle type="button" value=2><img src="..\assets\images\driving.png">driving with the windows down</mat-button-toggle>
+            <mat-button-toggle type="button" value=3><img src="..\assets\images\nature.png">one with nature</mat-button-toggle>
+            <mat-button-toggle type="button" value=4><img src="..\assets\images\club.png">at a club</mat-button-toggle>
         </mat-button-toggle-group>
     </mat-card>
     <br>
     <mat-card>
         <h3>Which beverage would quench your thirst at this very moment?</h3>
-        <mat-button-toggle-group #favcolor2="matButtonToggleGroup">
-            <mat-button-toggle type="button" value=1>hot tea</mat-button-toggle>
-            <mat-button-toggle type="button" value=2>caprisun</mat-button-toggle>
-            <mat-button-toggle type="button" value=3>iced coffee</mat-button-toggle>
-            <mat-button-toggle type="button" value=4>energy drink</mat-button-toggle>
+        <mat-button-toggle-group #drink="matButtonToggleGroup">
+            <mat-button-toggle type="button" value=1><img src="..\assets\images\tea.png">hot tea</mat-button-toggle>
+            <mat-button-toggle type="button" value=2><img src="..\assets\images\caprisun.png">caprisun</mat-button-toggle>
+            <mat-button-toggle type="button" value=3><img src="..\assets\images\icedcoffee.png">iced coffee</mat-button-toggle>
+            <mat-button-toggle type="button" value=4><img src="..\assets\images\energy.png">energy drink</mat-button-toggle>
         </mat-button-toggle-group>
     </mat-card>
     <br>
@@ -36,32 +36,31 @@
     <br>
     <mat-card>
         <h3>Which tattoo speaks to your soul?</h3>
-        <mat-button-toggle-group #favanimal="matButtonToggleGroup">
-            <mat-button-toggle type="button" value=1><img src="https://styles.redditmedia.com/t5_346cl/styles/communityIcon_09sormoxbtu31.png"></mat-button-toggle>
-            <mat-button-toggle type="button" value=2><img src="https://pbs.twimg.com/profile_images/597837691758071808/k5sArpEH_400x400.jpg"></mat-button-toggle>
-            <mat-button-toggle type="button" value=3><img src="https://styles.redditmedia.com/t5_2qojq/styles/communityIcon_tdrsm9kkmbv31.jpg"></mat-button-toggle>
-            <mat-button-toggle type="button" value=4><img src="https://i.etsystatic.com/39853966/r/il/3139bf/4469601372/il_fullxfull.4469601372_ac34.jpg"></mat-button-toggle>
+        <mat-button-toggle-group #tattoo="matButtonToggleGroup">
+            <mat-button-toggle type="button" value=1><img src="..\assets\images\koi.png"></mat-button-toggle>
+            <mat-button-toggle type="button" value=2><img src="..\assets\images\heart.png"></mat-button-toggle>
+            <mat-button-toggle type="button" value=3><img src="..\assets\images\face.png"></mat-button-toggle>
+            <mat-button-toggle type="button" value=4><img src="..\assets\images\angel.png"></mat-button-toggle>
         </mat-button-toggle-group>
-        <p id="response4">Chosen value is {{favanimal.value}}</p>
     </mat-card>
     <br>
     <mat-card>
         <h3>Which would you use to document your life?</h3>
-        <mat-button-toggle-group #favcolor2="matButtonToggleGroup">
-            <mat-button-toggle type="button" value=1>a journal</mat-button-toggle>
-            <mat-button-toggle type="button" value=2>my ipad</mat-button-toggle>
-            <mat-button-toggle type="button" value=3>quill and ink</mat-button-toggle>
-            <mat-button-toggle type="button" value=4>my notes app</mat-button-toggle>
+        <mat-button-toggle-group #journal="matButtonToggleGroup">
+            <mat-button-toggle type="button" value=1><img src="..\assets\images\journal.png">a journal</mat-button-toggle>
+            <mat-button-toggle type="button" value=2><img src="..\assets\images\ipad.png">my ipad</mat-button-toggle>
+            <mat-button-toggle type="button" value=3><img src="..\assets\images\quill.png">quill and ink</mat-button-toggle>
+            <mat-button-toggle type="button" value=4><img src="..\assets\images\notesapp.png">my notes app</mat-button-toggle>
         </mat-button-toggle-group>
     </mat-card>
     <br>
     <mat-card>
         <h3>What does your dream bedroom look like?</h3>
-        <mat-button-toggle-group #favcolor2="matButtonToggleGroup">
-            <mat-button-toggle type="button" value=1>a journal</mat-button-toggle>
-            <mat-button-toggle type="button" value=2>my ipad</mat-button-toggle>
-            <mat-button-toggle type="button" value=3>quill and ink</mat-button-toggle>
-            <mat-button-toggle type="button" value=4>my notes app</mat-button-toggle>
+        <mat-button-toggle-group #bedroom="matButtonToggleGroup">
+            <mat-button-toggle type="button" value=1><img src="..\assets\images\posters.png"></mat-button-toggle>
+            <mat-button-toggle type="button" value=2><img src="..\assets\images\colorful.png"></mat-button-toggle>
+            <mat-button-toggle type="button" value=3><img src="..\assets\images\blackwhite.png"></mat-button-toggle>
+            <mat-button-toggle type="button" value=4><img src="..\assets\images\colors.png"></mat-button-toggle>
         </mat-button-toggle-group>
     </mat-card>
     <br>
