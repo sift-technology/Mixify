@@ -32,8 +32,8 @@ type Response struct {
 		Energy       float64    `json:"energy"`
 		Popularity   int        `json:"popularity"`
 		Acousticness float64    `json:"acousticness"`
-		Track1       spotify.ID `json: "Track1"`
-		Track2       spotify.ID `json: "Track 2"`
+		Track1       spotify.ID `json:"Track1"`
+		Track2       spotify.ID `json:"Track2"`
 	}
 }
 
