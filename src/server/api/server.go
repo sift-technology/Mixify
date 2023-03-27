@@ -28,10 +28,12 @@ type Response struct {
 	R5 json.Number `json:"R5"`
 	R6 json.Number `json:"R6"`
 	M  struct {
-		Danceability float64 `json:"danceability"`
-		Energy       float64 `json:"energy"`
-		Popularity   int     `json:"popularity"`
-		Acousticness float64 `json:"acousticness"`
+		Danceability float64    `json:"danceability"`
+		Energy       float64    `json:"energy"`
+		Popularity   int        `json:"popularity"`
+		Acousticness float64    `json:"acousticness"`
+		Track1       spotify.ID `json: "Track1"`
+		Track2       spotify.ID `json: "Track 2"`
 	}
 }
 
@@ -107,17 +109,12 @@ func Weights(user *Response) {
 		fmt.Print("can't convert Response")
 	}
 
-	DanceWeightR1 := [4]float64{0.25, 0.5, 0.75, 1.0}[R1-1]
-	user.M.Danceability = DanceWeightR1 //average
-
-	EnergyWeightR2 := [4]float64{0.25, 0.5, 0.75, 1.0}[R2-1]
-	user.M.Energy = EnergyWeightR2 //scaled
-
-	AccusticnessWeightR4 := [4]float64{0.25, 0.5, 0.75, 1.0}[R4-1]
-	user.M.Acousticness = AccusticnessWeightR4
-
-	PopularityWeightR6 := int(R6) * 100
-	user.M.Popularity = PopularityWeightR6
+	user.M.Danceability = [4]float64{0.5, 0.75, 0.25, 1.0}[R1-1]
+	user.M.Energy = [4]float64{0.25, 0.5, 0.75, 1.0}[R2-1]
+	user.M.Popularity = int(R3) * 100
+	user.M.Track1 = [4]spotify.ID{fOcean, iceSpice, tImpala, cKeef}[R4-1]
+	user.M.Acousticness = [4]float64{0.75, 0.5, 1.09, 0.25}[R5-1]
+	user.M.Track2 = [4]spotify.ID{nirvana, tSwift, oneHeart, badBunny}[R6-1]
 
 }
 
