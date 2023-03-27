@@ -10,12 +10,23 @@ import (
 	"github.com/zmb3/spotify"
 )
 
+var badBunny spotify.ID = spotify.ID("1IHWl5LamUGEuP4ozKQSXZ")
+var tSwift spotify.ID = spotify.ID("1vrd6UOGamcKNGnSHJQlSt")
+var nirvana spotify.ID = spotify.ID("4P5KoWXOxwuobLmHXLMobV")
+var oneHeart spotify.ID = spotify.ID("4xF4ZBGPZKxECeDFrqSAG4")
+var fOcean spotify.ID = spotify.ID("3xKsf9qdS1CyvXSMEid6g8")
+var tImpala spotify.ID = spotify.ID("52ojopYMUzeNcudsoz7O9D")
+var cKeef spotify.ID = spotify.ID("01Lr5YepbgjXAWR9iOEyH1")
+var iceSpice spotify.ID = spotify.ID("6AQbmUe0Qwf5PZnt4HmTXv")
+
 type Response struct {
 	ID uuid.UUID   `json:"ID"`
 	R1 json.Number `json:"R1"`
 	R2 json.Number `json:"R2"`
 	R3 json.Number `json:"R3"`
 	R4 json.Number `json:"R4"`
+	R5 json.Number `json:"R4"`
+	R6 json.Number `json:"R4"`
 	M  struct {
 		Danceability float64 `json:"danceability"`
 		Energy       float64 `json:"energy"`
