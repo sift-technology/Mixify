@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Untracked files
-/src/server/spotify/authenticate.go
+authenticate.go
 # Compiled output
 /dist
 /tmp
