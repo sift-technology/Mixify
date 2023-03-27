@@ -72,7 +72,7 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var user Response
 		var userRec Rec
-		var i [4]json.Number
+		var i [6]json.Number
 		if err := json.NewDecoder(r.Body).Decode(&i); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
@@ -81,6 +81,8 @@ func (s *Server) CreateResponse() http.HandlerFunc {
 		user.R2 = i[1]
 		user.R3 = i[2]
 		user.R4 = i[3]
+		user.R5 = i[4]
+		user.R6 = i[5]
 		user.ID = uuid.New()
 		Weights(&user)
 		s.Responses_DB = append(s.Responses_DB, user)
