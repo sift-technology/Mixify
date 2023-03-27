@@ -25,8 +25,8 @@ type Response struct {
 	R2 json.Number `json:"R2"`
 	R3 json.Number `json:"R3"`
 	R4 json.Number `json:"R4"`
-	R5 json.Number `json:"R4"`
-	R6 json.Number `json:"R4"`
+	R5 json.Number `json:"R5"`
+	R6 json.Number `json:"R6"`
 	M  struct {
 		Danceability float64 `json:"danceability"`
 		Energy       float64 `json:"energy"`
