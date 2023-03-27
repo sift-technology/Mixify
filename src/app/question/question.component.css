@@ -2,7 +2,13 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-  
+  .mat-mdc-card {
+    margin: auto;
+  }
+
+  img {
+    width: 50%
+  }
   .example-section {
     display: flex;
     flex-wrap: wrap;
