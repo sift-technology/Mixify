@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class QuestionComponent{
     title = "Questions: ";
     disabled = false;
-    max = 100;
+    max = 10;
     min = 0;
     showTicks = false;
     step = 1;
