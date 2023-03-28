@@ -17,10 +17,14 @@ func TestValidateJSONResponse(t *testing.T) {
 	user["R2"] = `json:"1"`
 	user["R3"] = `json:"2"`
 	user["R4"] = `json:"300"`
+	user["R5"] = `json: "4000"`
+	user["R6"] = `json: "4"`
 	i.R1 = user["R1"]
 	i.R2 = user["R2"]
 	i.R3 = user["R3"]
 	i.R4 = user["R4"]
+	i.R5 = user["R5"]
+	i.R6 = user["R6"]
 	if i.R2 != user["R2"] {
 		t.Errorf("Could not populate Response with JSON numbers")
 	} else {
