@@ -113,9 +113,9 @@ func Weights(user *Response) {
 
 	user.M.Danceability = [4]float64{0.5, 0.75, 0.25, 1.0}[R1-1]
 	user.M.Energy = [4]float64{0.25, 0.5, 0.75, 1.0}[R2-1]
-	user.M.Popularity = int(R3) * 100
+	user.M.Popularity = int(R3) * 10
 	user.M.Track1 = [4]spotify.ID{fOcean, iceSpice, tImpala, cKeef}[R4-1]
-	user.M.Acousticness = [4]float64{0.75, 0.5, 1.09, 0.25}[R5-1]
+	user.M.Acousticness = [4]float64{0.75, 0.5, 1.0, 0.25}[R5-1]
 	user.M.Track2 = [4]spotify.ID{nirvana, tSwift, oneHeart, badBunny}[R6-1]
 
 }
